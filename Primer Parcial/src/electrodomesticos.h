@@ -28,32 +28,32 @@ typedef struct
  * \return 0
  *
  */
-void AltaElec(eElec emp[],int cant);
-/** \brief Recorre todos los indices del array empleado y ejecuta la funcion mostrarUno
+void AltaElec(eElec elec[],int cant);
+/** \brief Recorre todos los indices del array electrodomesticos y ejecuta la funcion mostrarUno
  *
  * \param array eElec
  * \param tamanio del array
  * \return 0
  *
  */
-void mostrarTodosElec (eElec emp[],int cant);
-/** \brief Muestra los datos de un empleado del indice indicado
+void mostrarTodosElec (eElec elec[],int cant);
+/** \brief Muestra los datos de un electrodomestico del indice indicado
  *
  * \param array eElec
  * \return 0
  *
  */
 
-void mostrarUnoElec(eElec emp);
+void mostrarUnoElec(eElec elec);
 
-/** \brief Ejecuta el ordenamiento de burbuja por apellido y sector de forma ascendiente
+/** \brief Ejecuta el ordenamiento de burbuja por modelo y serie de forma ascendiente
  *
  * \param array eElec
  * \param tamanio del array
  * \return 0
  *
  */
-void ordenarMoySe(eElec emp[],int cant);
+void ordenarMoySe(eElec elec[],int cant);
 
 /** \brief Busca un espacio vacio en el array eElec y pide datos para cargar
  *
@@ -62,8 +62,8 @@ void ordenarMoySe(eElec emp[],int cant);
  * \return 0
  *
  */
-void initElec (eElec emp[], int cant);
-/** \brief Muestra todos los datos de los empleados te pide que elijas uno por id y abre un menu para elegir que dato modificar
+void initElec (eElec elec[], int cant);
+/** \brief Muestra todos los datos de los electrodomesticos te pide que elijas uno por id y abre un menu para elegir que dato modificar
  *
  * \param array eElec
  * \param tamanio del array
@@ -71,15 +71,15 @@ void initElec (eElec emp[], int cant);
  *
  */
 
-void Modificacion (eElec emp[], int cant);
-/** \brief Da la baja logica al empleado deseado reemplazando el 0 por un 1
+void Modificacion (eElec elec[], int cant);
+/** \brief Da la baja logica al electrodomestico deseado reemplazando el 0 por un 1
  *
  * \param array eElec
  * \param tamanio del array
  * \return 0
  *
  */
-void Baja (eElec emp[], int cant);
+void Baja (eElec elec[], int cant);
 /** \brief revisa que todos los indices del array eElec tengan un 1 en isEmpty
  *
  * \param array eElec
@@ -88,14 +88,20 @@ void Baja (eElec emp[], int cant);
  *
  */
 
-int AllEmptyElec(eElec emp[], int cant);
-/** \brief Calcula el promedio de todos los salarios cargados hasta el momento
+int AllEmptyElec(eElec elec[], int cant);
+/** \brief Recorre todos los indices del array marcas y ejecuta la funcion mostrarUno
  *
  * \param array eElec
  * \param tamanio del array
- * \return promedio
+ * \return 0
+ *
+ */
+void mostrarTodosMarca(eMarca marca[],int cant);
+/** \brief Muestra los datos de un electrodomestico del indice indicado
+ *
+ * \param array eElec
+ * \return 0
  *
  */
 
-void mostrarTodosMarca(eMarca marca[],int cant);
 void mostrarUnoMarca(eMarca marcas);
