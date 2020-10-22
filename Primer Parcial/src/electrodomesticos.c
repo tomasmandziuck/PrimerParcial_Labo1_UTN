@@ -15,11 +15,13 @@ void AltaElec(eElec elec[], int cant)
         if(elec[i].isEmpty==1)
         {
 
-            elec[i].Id = (i+1);
-            utn_getInt(&elec[i].serie, "\ningresar Serie:1 a 5", "Serie no valida", 1,5,3);
-            utn_getFloat(&elec[i].IdMarca, "\ningresar modelo:\n1000 Wirpool\n1001 Sony\n1002 Liliana\n1003 Gafa\n1004 Philips\n", "modelo no valido", 1000,1004,3);
-            utn_getFloat(&elec[i].modelo, "\ningresar modelo:1980 a 2020", "modelo no valido", 1980,2020,3);
+            elec[i].Id =(i+1);
+            utn_getInt(&elec[i].serie, "\ningresar Serie:1 a 5", "Serie no valida", 1,5,90);
+            utn_getFloat(&elec[i].IdMarca, "\ningresar Marca:\n1000 Wirpool\n1001 Sony\n1002 Liliana\n1003 Gafa\n1004 Philips\n", "Marca no valida", 1000,1004,90);
+            utn_getFloat(&elec[i].modelo, "\ningresar modelo:1980 a 2020", "modelo no valido", 1980,2020,90);
             elec[i].isEmpty=0;
+            printf("\nId:%d\nSerie:%d\nIdMarca:%.0f\nModelo:%.0f\n",elec[i].Id, elec[i].serie, elec[i].IdMarca,elec[i].modelo);
+            system("pause");
             break;
         }
 
@@ -37,15 +39,11 @@ void mostrarTodosElec(eElec elec[],int cant)
     for(i=0; i<cant; i++)
     {
 
+    	if(elec[i].isEmpty==0)
+    	        {
+    	            mostrarUnoElec(elec[i]);
+    	        }
 
-        if(elec[i].isEmpty==0)
-        {
-            mostrarUnoElec(elec[i]);
-        }
-        else
-        {
-            break;
-        }
     }
 
 }
@@ -126,7 +124,7 @@ void initElec (eElec elec[], int cant)
     {
         if(auxId==elec[i].Id)
         {
-            printf("\nId:%d\nSerie:%d\nMarca:%.0f\nModelo:%.0f\n",elec[i].Id, elec[i].serie, elec[i].IdMarca,elec[i].modelo);
+            printf("\nId:%d\nSerie:%d\nMarca:%.0f\nModelo:%.0f\nempty:%d\n",elec[i].Id, elec[i].serie, elec[i].IdMarca,elec[i].modelo, elec[i].isEmpty);
             do
             {
                 printf("\nDesea borrar este registro s/n");

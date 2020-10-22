@@ -15,6 +15,7 @@ int main()
     char seguir ='s';
     eElec elec[MAX];
     eRep reparacion[MAX];
+    eCli clientes[MAX]={{0,"Rodrigo","Bianchi"},{0,"Guido","Campostrini"},{0,"Agustin","Funes"},{0,"Tomas","Mandziuck"},{0,"Federico","Mandziuck"}};
     eMarca marcas[5] = {{1000,"Wirpoll"},{1001,"Sony"},{1002,"Liliana"},{1003,"Gafa"},{1004,"Philips"}};
     eSer servicios[4] ={{20000,"Garantia",250},{20001,"Mantenimiento",500},{20002,"Repuestos",400},{20003,"Refaccion",600}};
 
@@ -78,7 +79,7 @@ int main()
             }
         case 7:
 
-               AltaRep(reparacion,MAX);
+               AltaRep(reparacion,clientes,MAX);
                system("cls");
                break;
 
