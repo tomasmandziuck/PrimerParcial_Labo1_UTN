@@ -6,21 +6,23 @@
 #include "utn.h"
 #define MAX 5
 
-void AltaElec(eElec elec[], int cant)
+void AltaElec(eElec elec[],eMarca marca[],ePro procedencia[], int cant,int* id)
 {
-    int i;
+    int i,auxId;
     for(i=0; i<cant; i++)
     {
 
         if(elec[i].isEmpty==1)
         {
-
-            elec[i].Id =(i+1);
+        	auxId=*id;
+            elec[i].Id =auxId;
             utn_getInt(&elec[i].serie, "\ningresar Serie:1 a 5", "Serie no valida", 1,5,90);
-            utn_getFloat(&elec[i].IdMarca, "\ningresar Marca:\n1000 Wirpool\n1001 Sony\n1002 Liliana\n1003 Gafa\n1004 Philips\n", "Marca no valida", 1000,1004,90);
+            utn_getInt(&elec[i].IdMarca, "\ningresar Marca:\n1000 Wirpool\n1001 Sony\n1002 Liliana\n1003 Gafa\n1004 Philips\n", "Marca no valida", 1000,1004,90);
             utn_getFloat(&elec[i].modelo, "\ningresar modelo:1980 a 2020", "modelo no valido", 1980,2020,90);
+            utn_getInt(&elec[i].IdPro, "\ningresar Procedencia:\n1 Argentina\n2 China\n3 Taiwan\n4 EEUU\n", "Marca no valida", 1,4,90);
             elec[i].isEmpty=0;
-            printf("\nId:%d\nSerie:%d\nIdMarca:%.0f\nModelo:%.0f\n",elec[i].Id, elec[i].serie, elec[i].IdMarca,elec[i].modelo);
+            mostrarUnoElec(elec[i],marca,procedencia);
+            (*id)++;
             system("pause");
             break;
         }
@@ -32,7 +34,7 @@ void AltaElec(eElec elec[], int cant)
 
 
 
-void mostrarTodosElec(eElec elec[],int cant)
+void mostrarTodosElec(eElec elec[],eMarca marca[],ePro procedencia[],int cant)
 {
     int i;
 
@@ -41,16 +43,24 @@ void mostrarTodosElec(eElec elec[],int cant)
 
     	if(elec[i].isEmpty==0)
     	        {
-    	            mostrarUnoElec(elec[i]);
+    	            mostrarUnoElec(elec[i],marca,procedencia);
     	        }
 
     }
-
+    system("pause");
 }
 
-void mostrarUnoElec(eElec elec)
+void mostrarUnoElec(eElec elec,eMarca marca[],ePro procedencia[])
 {
-    printf("\nId:%d\nSerie:%d\nIdMarca:%.0f\nModelo:%.0f\n",elec.Id, elec.serie, elec.IdMarca,elec.modelo);
+	int y,o;
+	for(y=0;y<5;y++){
+		for(o=0;o<4;o++){
+	if(elec.IdMarca==marca[y].Id&&elec.IdPro==procedencia[o].Id){
+
+    printf("\nId:%d\nSerie:%d\nMarca:%s\nModelo:%.0f\nProcedencia:%s\n",elec.Id, elec.serie, marca[y].Marca,elec.modelo,procedencia[o].Pais);
+	}
+	}
+	}
 }
 
 void mostrarTodosMarca(eMarca marca[],int cant)
@@ -63,14 +73,30 @@ void mostrarTodosMarca(eMarca marca[],int cant)
     	mostrarUnoMarca(marca[i]);
 
     }
-
+    system("pause");
 }
 
 void mostrarUnoMarca(eMarca marcas)
 {
     printf("\nId:%d\nMarca:%s\n",marcas.Id, marcas.Marca);
 }
+void mostrarTodosPro(ePro procedencia[],int cant)
+{
+    int i;
 
+    for(i=0; i<cant; i++)
+    {
+
+    	mostrarUnoPro(procedencia[i]);
+
+    }
+    system("pause");
+}
+
+void mostrarUnoPro(ePro procedencia)
+{
+    printf("\nId:%d\nPais:%s\n",procedencia.Id, procedencia.Pais);
+}
 
 void ordenarMoySe(eElec elec[],int cant)
 {
@@ -112,19 +138,19 @@ void initElec (eElec elec[], int cant)
 
 }
 
- void Baja (eElec elec[], int cant)
+ void Baja (eElec elec[],eMarca marca[],ePro procedencia[], int cant)
 {
     int auxId;
     int flag=0,i;
     char rta;
-    mostrarTodosElec(elec, MAX);
+    mostrarTodosElec(elec,marca,procedencia, MAX);
     fflush(stdin);
     utn_getInt(&auxId, "que Id desea buscar?", "Id no encontrado", 1, 3, 3);
     for(i=0; i<cant; i++)
     {
         if(auxId==elec[i].Id)
         {
-            printf("\nId:%d\nSerie:%d\nMarca:%.0f\nModelo:%.0f\nempty:%d\n",elec[i].Id, elec[i].serie, elec[i].IdMarca,elec[i].modelo, elec[i].isEmpty);
+        	mostrarUnoElec(elec[i],marca,procedencia);
             do
             {
                 printf("\nDesea borrar este registro s/n");
@@ -153,19 +179,19 @@ void initElec (eElec elec[], int cant)
 
 }
 
-void Modificacion (eElec elec[], int cant)
+void Modificacion (eElec elec[],eMarca marca[],ePro procedencia[], int cant)
 {
     int auxId;
     int flag=0,i,OP;
     char seguir='s',rta;
-    mostrarTodosElec(elec, MAX);
+    mostrarTodosElec(elec,marca,procedencia, cant);
     fflush(stdin);
     utn_getInt(&auxId, "Que Id desea buscar?", "Id no encontrado", 1, 3, 3);
     for(i=0; i<cant; i++)
     {
         if(auxId==elec[i].Id)
         {
-            printf("\nId:%d\nSerie:%d\nMarca:%.0f\nModelo:%.0f\n",elec[i].Id, elec[i].serie, elec[i].IdMarca,elec[i].modelo);
+        	mostrarUnoElec(elec[i],marca,procedencia);
             do
             {
                 printf("\ndesea modificar este registro s/n");
@@ -178,27 +204,31 @@ void Modificacion (eElec elec[], int cant)
                 do
                 {
 
-                    printf("\nQue desea modificar ?\n1- Serie\n2- Marca\n3- Modelo\n4-salir\n");
+                    printf("\nQue desea modificar ?\n1- Serie\n2- Marca\n3- Modelo\n4- Procedencia\n5-salir\n");
                     utn_getInt(&OP, "\ningresar opcion", "opcion no valida", 1,5,3);
                     switch(OP)
                     {
 
 
                     case 1:
-                    	utn_getInt(&elec[i].serie, "\ningresar modelo:1 a 5", "Serie no valida", 1,5,3);
+                    	utn_getInt(&elec[i].serie, "\ningresar modelo:1 a 5", "Serie no valida", 1,5,90);
                         system("cls");
                         break;
 
                     case 2:
-                    	utn_getFloat(&elec[i].IdMarca, "\ningresar modelo:\n1000 Wirpool\n1001 Sony\n1002 Liliana\n1003 Gafa\n1004 Philips\n", "modelo no valido", 1000,1004,3);
+                    	utn_getInt(&elec[i].IdMarca, "\ningresar modelo:\n1000 Wirpool\n1001 Sony\n1002 Liliana\n1003 Gafa\n1004 Philips\n", "modelo no valido", 1000,1004,90);
                         system("cls");
                         break;
 
                     case 3:
-                    	utn_getFloat(&elec[i].modelo, "\ningresar modelo:1980 a 2020", "modelo no valido", 1980,2020,3);
+                    	utn_getFloat(&elec[i].modelo, "\ningresar modelo:1980 a 2020", "modelo no valido", 1980,2020,90);
                         system("cls");
                         break;
                     case 4:
+                    	utn_getInt(&elec[i].IdPro, "\ningresar Procedencia:\n1 Argentina\n2 China\n3 Taiwan\n4 EEUU\n", "Marca no valida", 1,4,90);
+                                            system("cls");
+                                            break;
+                    case 5:
                         seguir='n';
                         break;
                     }
